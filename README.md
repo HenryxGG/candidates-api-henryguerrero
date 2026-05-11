@@ -83,7 +83,7 @@ Esto crea dos contenedores: la API en el puerto `4000` y una instancia de MongoD
 - GET `/api/v1/candidates/:id` — Obtener un candidato por su ID
 - POST `/api/v1/candidates` — Crear un nuevo candidato
 - PUT `/api/v1/candidates/:id` — Actualizar los datos de un candidato
-- DELETE `/api/v1/candidates/:id` — Eliminar un candidato (soft delete)
+- DELETE `/api/v1/candidates/:id` — Eliminar un candidato por medio de un soft delete, no delete físico
 
 ### Jobs (requieren token JWT)
 
