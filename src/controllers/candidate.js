@@ -29,9 +29,6 @@ const create = async (req, res) => {
         console.log("Candidato creado:", req.body);
     const candidate = await candidateModel.create(req.body);
     res.status(201).json(candidate); //crea un nuevo candidato con los datos enviados en el cuerpo de la solicitud. Si la creación es exitosa, devuelve el nuevo candidato con un estado 201.
-   if(candidate.name === "Jhon Doe") {
-    return res.status(403).json({status:0, message: "El nombre 'Jhon Doe' no es permitido"});
-   }
 } catch (error) {
     console.log("Algo fallo ", error);
     res.status(500).json({status:0, message: "Error al crear el candidato"});// Si ocurre un error, devuelve un mensaje de error con un estado 500, ocultando detalles específicos del error para evitar exponer información sensible.
