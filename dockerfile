@@ -4,7 +4,10 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+RUN addgroup -S nonroot \
+    && adduser -S nonroot -G nonroot
+
+USER nonroot
 
 COPY . .
 
