@@ -1,22 +1,9 @@
 const passport = require('passport');
- const {basicStrategy, BasicStrategy} = require('passport-http');
- const passportJWT = require("passport-jwt");
+const passportJWT = require("passport-jwt");
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 
 const UserModel = require("../models/user");
-
- const  { AUTH_USERNAME, AUTH_PASSWORD } = process.env;
-
- passport.use(
-    'general',
-    new BasicStrategy((username, password, done) => {
-        if (username === AUTH_USERNAME && password === AUTH_PASSWORD) {
-            return done(null, { username });
-        } 
-        return done(null, false);
-    })
- );
 
 passport.use(
     "jwt",

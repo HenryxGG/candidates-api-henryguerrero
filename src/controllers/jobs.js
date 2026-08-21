@@ -5,6 +5,7 @@ const getAll = async (req, res) => {
     const { status } = req.query;
     const filter = {};
     if (status) filter.status = status;
+    filter.deleted = false;
 
     const jobsList = await JobModel.find(filter);
     res.send(jobsList);
@@ -16,7 +17,7 @@ const getAll = async (req, res) => {
 
 const getById = async (req, res) => {
   try {
-    const job = await JobModel.findById(req.params.id);
+    const job = await JobModel.findOne({ _id: req.params.id, deleted: false});
     if (!job) {
       return res.status(404).json({ message: "Job no encontrado" });
     }
@@ -56,11 +57,15 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
   try {
-    const job = await JobModel.findByIdAndDelete(req.params.id);
+    const job = await JobModel.findOneAndUpdate(
+      { _id: req.params.id, deleted: false },
+      { deleted: true },
+      { new: true }
+    );
     if (!job) {
       return res.status(404).json({ message: "Job no encontrado" });
     }
-    res.send({ message: "Job eliminado" });
+    res.send({ message: "Job eliminado", job });
   } catch (error) {
     console.log("Error al eliminar job", error);
     res.status(500).json({ status: 0, message: "Error al eliminar el job" });

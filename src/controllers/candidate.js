@@ -1,6 +1,4 @@
-const { message } = require('statuses');
 const candidateModel = require('../models/candidate'); //importamos el modelo de candidato tiene acceso a db
-const { RunCommandCursor } = require('mongodb');
 
 const getAll = async (_req, res) => {
     const filter = { deleted: false }; // Solo candidatos no eliminados
