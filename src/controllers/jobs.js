@@ -30,7 +30,8 @@ const getById = async (req, res) => {
 
 const create = async (req, res) => {
   try {
-    const job = await JobModel.create(req.body);
+  const { username, email, password } = req.body;
+  const user = new UserModel({ username, email, password });
     res.status(201).send(job);
   } catch (error) {
     console.log("Error al crear job", error);
